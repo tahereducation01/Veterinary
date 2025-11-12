@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Premium Veterinary Care for Your Beloved Pets</h1>
+        <p>Comprehensive healthcare services with experienced professionals. Your pet's health is our top priority.</p>
+        <a href="{{ url_for('appointments') }}" class="btn-primary">Book Appointment</a>
+    </div>
+</section>
+
+<!-- Services Overview -->
+<section class="section">
+    <div class="section-title">
+        <h2>Our Services</h2>
+        <p>Comprehensive veterinary care for all your pet's needs</p>
+    </div>
+    <div class="cards-grid">
+        {% for service in services %}
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-stethoscope"></i>
+            </div>
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.description }}</p>
+            <div class="card-price">₹{{ "%.2f"|format(service.price) }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="{{ url_for('services') }}" class="btn-primary">View All Services</a>
+    </div>
+</section>
+
+<!-- Pet Gallery Section -->
+<section class="section" style="background: var(--light);">
+    <div class="section-title">
+        <h2>Our Beloved Patients</h2>
+        <p>Meet some of the wonderful pets we're privileged to care for</p>
+    </div>
+    <div class="pet-gallery">
+        <div class="pet-card">
+            <div class="pet-image">
+                <img src="https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Golden Retriever">
+            </div>
+            <div class="pet-info">
+                <h3>Golden Retrievers</h3>
+                <p>Friendly and intelligent companions who bring joy to every family</p>
+            </div>
+        </div>
+        <div class="pet-card">
+            <div class="pet-image">
+                <img src="https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Persian Cat">
+            </div>
+            <div class="pet-info">
+                <h3>Persian Cats</h3>
+                <p>Elegant and gentle felines with luxurious coats and sweet personalities</p>
+            </div>
+        </div>
+        <div class="pet-card">
+            <div class="pet-image">
+                <img src="https://images.pexels.com/photos/4588057/pexels-photo-4588057.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Beagle Puppy">
+            </div>
+            <div class="pet-info">
+                <h3>Beagle Pups</h3>
+                <p>Curious and merry hounds with excellent sense of smell and friendly nature</p>
+            </div>
+        </div>
+        <div class="pet-card">
+            <div class="pet-image">
+                <img src="https://images.pexels.com/photos/1276553/pexels-photo-1276553.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Siamese Cat">
+            </div>
+            <div class="pet-info">
+                <h3>Siamese Kittens</h3>
+                <p>Vocal and affectionate cats known for their striking blue eyes and social nature</p>
+            </div>
+        </div>
+        <div class="pet-card">
+            <div class="pet-image">
+                <img src="https://images.pexels.com/photos/1629781/pexels-photo-1629781.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="German Shepherd">
+            </div>
+            <div class="pet-info">
+                <h3>German Shepherds</h3>
+                <p>Loyal and courageous working dogs with exceptional intelligence</p>
+            </div>
+        </div>
+        <div class="pet-card">
+            <div class="pet-image">
+                <img src="https://images.pexels.com/photos/326012/pexels-photo-326012.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Rabbit">
+            </div>
+            <div class="pet-info">
+                <h3>Pet Rabbits</h3>
+                <p>Gentle and social companions that bring quiet joy to any home</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Doctors -->
+<section class="section">
+    <div class="section-title">
+        <h2>Our Expert Veterinarians</h2>
+        <p>Meet our team of dedicated veterinary professionals</p>
+    </div>
+    <div class="cards-grid">
+        {% for doctor in featured_doctors %}
+        <div class="doctor-card">
+            <div class="doctor-image">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <h3>{{ doctor.name }}</h3>
+            <div class="doctor-specialization">{{ doctor.specialization }}</div>
+            <p>{{ doctor.bio }}</p>
+            <div style="margin-top: 1rem;">
+                <strong>Experience:</strong> {{ doctor.experience }} years<br>
+                <strong>Availability:</strong> {{ doctor.availability }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div style="text-align: center; margin-top: 2rem;">
+        <a href="{{ url_for('doctors') }}" class="btn-primary">Meet All Doctors</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="section" style="background: var(--light);">
+    <div class="section-title">
+        <h2>Why Choose Anicare?</h2>
+        <p>We provide exceptional care with modern facilities</p>
+    </div>
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <h3>24/7 Emergency Care</h3>
+            <p>Round-the-clock emergency services for your pet's urgent needs</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-laptop-medical"></i>
+            </div>
+            <h3>Digital Health Records</h3>
+            <p>Easy access to your pet's medical history and treatment plans</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-calendar-check"></i>
+            </div>
+            <h3>Easy Scheduling</h3>
+            <p>Book appointments online with your preferred veterinarian</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h3>Compassionate Care</h3>
+            <p>We treat every pet with the love and attention they deserve</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Advanced Equipment</h3>
+            <p>State-of-the-art medical technology for accurate diagnosis</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-home"></i>
+            </div>
+            <h3>Comfortable Environment</h3>
+            <p>Stress-free clinic designed for your pet's comfort</p>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="section">
+    <div class="section-title">
+        <h2>Happy Pet Parents</h2>
+        <p>What our clients say about their experience</p>
+    </div>
+    <div class="cards-grid">
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-quote-left"></i>
+            </div>
+            <p>"The care my Labrador received at Anicare was exceptional. The doctors are truly dedicated!"</p>
+            <div style="margin-top: 1rem; font-weight: bold; color: var(--primary);">
+                - Priya Sharma
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-quote-left"></i>
+            </div>
+            <p>"Emergency service saved my cat's life. Thank you for being available 24/7!"</p>
+            <div style="margin-top: 1rem; font-weight: bold; color: var(--primary);">
+                - Rajesh Kumar
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-quote-left"></i>
+            </div>
+            <p>"The online appointment system is so convenient. Great service for busy pet owners!"</p>
+            <div style="margin-top: 1rem; font-weight: bold; color: var(--primary);">
+                - Anjali Patel
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+    <div class="section-title">
+        <h2>Pet Health Records</h2>
+        <p>Manage your pet's medical information and history</p>
+    </div>
+
+    <!-- Add Pet Button -->
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <button onclick="showAddPetForm()" class="btn-primary">Add New Pet</button>
+    </div>
+
+    <!-- Add Pet Form -->
+    <div id="addPetForm" class="form-container" style="display: none; margin-bottom: 3rem;">
+        <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">Add New Pet</h3>
+        <form method="POST" action="{{ url_for('add_pet') }}">
+            <div class="form-group">
+                <label for="name">Pet Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="species">Species</label>
+                <select id="species" name="species" required>
+                    <option value="">Select Species</option>
+                    <option value="Dog">Dog</option>
+                    <option value="Cat">Cat</option>
+                    <option value="Bird">Bird</option>
+                    <option value="Rabbit">Rabbit</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="breed">Breed</label>
+                <input type="text" id="breed" name="breed">
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age (years)</label>
+                <input type="number" id="age" name="age" min="0" max="50">
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" name="weight" step="0.1" min="0">
+            </div>
+
+            <div class="form-group">
+                <label for="medical_history">Medical History</label>
+                <textarea id="medical_history" name="medical_history" rows="4" placeholder="Any existing medical conditions, allergies, or previous treatments..."></textarea>
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+                <button type="submit" class="btn-primary" style="flex: 1;">Save Pet</button>
+                <button type="button" onclick="hideAddPetForm()" class="btn-primary" style="flex: 1; background: var(--text);">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Pets List -->
+    {% if pets %}
+    <div class="cards-grid">
+        {% for pet in pets %}
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                <h3>{{ pet.name }}</h3>
+                <span style="background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.9rem;">
+                    {{ pet.species }}
+                </span>
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <p><strong>Breed:</strong> {{ pet.breed or 'Not specified' }}</p>
+                <p><strong>Age:</strong> {{ pet.age or 'Not specified' }} years</p>
+                <p><strong>Weight:</strong> {{ pet.weight or 'Not specified' }} kg</p>
+            </div>
+
+            {% if pet.medical_history %}
+            <div style="margin-bottom: 1rem;">
+                <strong>Medical History:</strong>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;">{{ pet.medical_history }}</p>
+            </div>
+            {% endif %}
+
+            <a href="{{ url_for('appointments') }}" class="btn-primary" style="display: inline-block; width: 100%; text-align: center;">
+                Book Appointment for {{ pet.name }}
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="card" style="text-align: center; max-width: 600px; margin: 0 auto;">
+        <h3>No Pets Added Yet</h3>
+        <p>Add your first pet to get started with managing their health records.</p>
+        <button onclick="showAddPetForm()" class="btn-primary" style="margin-top: 1rem;">Add Your First Pet</button>
+    </div>
+    {% endif %}
+</section>
+
+<script>
+function showAddPetForm() {
+    document.getElementById('addPetForm').style.display = 'block';
+}
+
+function hideAddPetForm() {
+    document.getElementById('addPetForm').style.display = 'none';
+}
+</script>
+{% endblock %}  

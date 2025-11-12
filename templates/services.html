@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+    <div class="section-title">
+        <h2>Our Veterinary Services</h2>
+        <p>Comprehensive care for your pet's health and well-being</p>
+    </div>
+
+    <div class="cards-grid">
+        {% for service in services %}
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-stethoscope"></i>
+            </div>
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.description }}</p>
+            <div class="card-price">₹{{ "%.2f"|format(service.price) }}</div>
+            <div style="margin: 1rem 0;">
+                <strong>Duration:</strong> {{ service.duration }} minutes
+            </div>
+            {% if session.user_id %}
+            <a href="{{ url_for('appointments') }}" class="btn-primary" style="display: inline-block; margin-top: 1rem;">
+                Book Now
+            </a>
+            {% else %}
+            <a href="{{ url_for('login') }}" class="btn-primary" style="display: inline-block; margin-top: 1rem;">
+                Login to Book
+            </a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Additional Info Section -->
+<section class="section" style="background: var(--light);">
+    <div class="section-title">
+        <h2>Comprehensive Pet Care</h2>
+        <p>We offer a wide range of services to keep your pet healthy and happy</p>
+    </div>
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <div class="cards-grid">
+            <div class="card">
+                <h3>Preventive Care</h3>
+                <p>Regular checkups, vaccinations, and preventive treatments to keep your pet healthy</p>
+            </div>
+            <div class="card">
+                <h3>Surgical Services</h3>
+                <p>Advanced surgical procedures with state-of-the-art equipment and monitoring</p>
+            </div>
+            <div class="card">
+                <h3>Dental Care</h3>
+                <p>Complete dental services including cleaning, extractions, and oral surgery</p>
+            </div>
+            <div class="card">
+                <h3>Emergency Services</h3>
+                <p>24/7 emergency care for accidents, injuries, and sudden illnesses</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+    <div class="section-title">
+        <h2>Book an Appointment</h2>
+        <p>Schedule your pet's visit with our expert veterinarians</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto;">
+        <!-- Booking Form -->
+        <div class="form-container">
+            <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">New Appointment</h3>
+            <form method="POST">
+                <div class="form-group">
+                    <label for="doctor_id">Select Doctor</label>
+                    <select id="doctor_id" name="doctor_id" required>
+                        <option value="">Choose a Doctor</option>
+                        {% for doctor in doctors %}
+                        <option value="{{ doctor.id }}">Dr. {{ doctor.name }} - {{ doctor.specialization }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="service_id">Select Service</label>
+                    <select id="service_id" name="service_id" required>
+                        <option value="">Choose a Service</option>
+                        {% for service in services %}
+                        <option value="{{ service.id }}">{{ service.name }} - ₹{{ "%.2f"|format(service.price) }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="pet_id">Select Pet</label>
+                    <select id="pet_id" name="pet_id" required>
+                        <option value="">Choose a Pet</option>
+                        {% for pet in pets %}
+                        <option value="{{ pet.id }}">{{ pet.name }} ({{ pet.species }})</option>
+                        {% endfor %}
+                    </select>
+                    <small style="color: var(--accent); margin-top: 0.5rem; display: block;">
+                        <a href="{{ url_for('records') }}">Add new pet</a>
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Appointment Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Appointment Time</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+
+                <button type="submit" class="btn-primary" style="width: 100%;">Book Appointment</button>
+            </form>
+        </div>
+
+        <!-- Existing Appointments -->
+        <div>
+            <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">Your Appointments</h3>
+            {% if appointments %}
+            <div class="cards-grid" style="grid-template-columns: 1fr;">
+                {% for appointment in appointments %}
+                <div class="card">
+                    <h4>Appointment with Dr. {{ appointment.doctor_name }}</h4>
+                    <p><strong>Service:</strong> {{ appointment.service_name }}</p>
+                    <p><strong>Pet:</strong> {{ appointment.pet_name }}</p>
+                    <p><strong>Date:</strong> {{ appointment.date }} at {{ appointment.time }}</p>
+                    <p><strong>Status:</strong> 
+                        <span style="color: {% if appointment.status == 'confirmed' %}green{% elif appointment.status == 'pending' %}orange{% else %}red{% endif %};">
+                            {{ appointment.status|title }}
+                        </span>
+                    </p>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="card" style="text-align: center;">
+                <p>No appointments scheduled yet.</p>
+                <p>Book your first appointment today!</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
