@@ -60,6 +60,15 @@ body {
     align-items: center;
     gap: 2rem;
 }
+/* Mobile toggle button (hidden on desktop) */
+.nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--light);
+    font-size: 1.25rem;
+    cursor: pointer;
+}
 
 .nav-menu a {
     color: var(--light);
@@ -345,6 +354,74 @@ main {
         padding: 2rem 1rem;
     }
 }
+/* Responsive navbar behavior */
+@media (max-width: 992px) {
+    .nav-container {
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-container {
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--primary);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.5rem 1rem 1rem 1rem;
+        display: none;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        z-index: 999;
+    }
+
+    .nav-menu.open {
+        display: flex;
+    }
+
+    .nav-menu li {
+        margin: 0.25rem 0;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 0.6rem 0.75rem;
+        color: var(--light);
+        border-radius: 6px;
+    }
+
+    .nav-user {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        color: var(--light);
+    }
+
+    .btn-login, .btn-logout {
+        display: inline-block;
+        width: auto;
+        padding: 0.45rem 0.9rem;
+        margin-top: 0.25rem;
+    }
+
+    /* Ensure main content doesn't sit behind fixed navbar on small screens */
+    main {
+        margin-top: 88px;
+    }
+}
+
 /* Pet Gallery Styles */
 .pet-gallery {
     display: grid;
