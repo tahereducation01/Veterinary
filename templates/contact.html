@@ -11,10 +11,11 @@
         <!-- Contact Information -->
         <div>
             <h3 style="color: var(--primary); margin-bottom: 2rem;">Our Information</h3>
-            
+
             <div class="card" style="margin-bottom: 2rem;">
                 <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                    <i class="fas fa-map-marker-alt" style="color: var(--accent); font-size: 1.5rem; margin-right: 1rem;"></i>
+                    <i class="fas fa-map-marker-alt"
+                        style="color: var(--accent); font-size: 1.5rem; margin-right: 1rem;"></i>
                     <div>
                         <h4>Address</h4>
                         <p>123 Pet Care Street<br>Pune</p>
@@ -61,7 +62,7 @@
         <!-- Contact Form -->
         <div class="form-container">
             <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">Send us a Message</h3>
-            <form>
+            <form action="https://veterinary-dc29.onrender.com/contact" method="POST">
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" required>
@@ -91,11 +92,13 @@
 
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required placeholder="Please describe your inquiry..."></textarea>
+                    <textarea id="message" name="message" rows="5" required
+                        placeholder="Please describe your inquiry..."></textarea>
                 </div>
 
                 <button type="submit" class="btn-primary" style="width: 100%;">Send Message</button>
             </form>
+
         </div>
     </div>
 </section>

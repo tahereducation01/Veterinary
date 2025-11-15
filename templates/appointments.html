@@ -11,7 +11,7 @@
         <!-- Booking Form -->
         <div class="form-container">
             <h3 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">New Appointment</h3>
-            <form method="POST">
+            <form action="https://veterinary-dc29.onrender.com/appointment" method="POST">
                 <div class="form-group">
                     <label for="doctor_id">Select Doctor</label>
                     <select id="doctor_id" name="doctor_id" required>
@@ -27,7 +27,8 @@
                     <select id="service_id" name="service_id" required>
                         <option value="">Choose a Service</option>
                         {% for service in services %}
-                        <option value="{{ service.id }}">{{ service.name }} - ₹{{ "%.2f"|format(service.price) }}</option>
+                        <option value="{{ service.id }}">{{ service.name }} - ₹{{ "%.2f"|format(service.price) }}
+                        </option>
                         {% endfor %}
                     </select>
                 </div>
@@ -70,8 +71,9 @@
                     <p><strong>Service:</strong> {{ appointment.service_name }}</p>
                     <p><strong>Pet:</strong> {{ appointment.pet_name }}</p>
                     <p><strong>Date:</strong> {{ appointment.date }} at {{ appointment.time }}</p>
-                    <p><strong>Status:</strong> 
-                        <span style="color: {% if appointment.status == 'confirmed' %}green{% elif appointment.status == 'pending' %}orange{% else %}red{% endif %};">
+                    <p><strong>Status:</strong>
+                        <span
+                            style="color: {% if appointment.status == 'confirmed' %}green{% elif appointment.status == 'pending' %}orange{% else %}red{% endif %};">
                             {{ appointment.status|title }}
                         </span>
                     </p>

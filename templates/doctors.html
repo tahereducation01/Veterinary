@@ -11,7 +11,11 @@
         {% for doctor in doctors %}
         <div class="doctor-card">
             <div class="doctor-image">
-                <i class="fas fa-user-md"></i>
+                {% if doctor.photo_url %}
+                    <img src="{{ doctor.photo_url }}" alt="{{ doctor.name }}">
+                {% else %}
+                    <i class="fas fa-user-md"></i>
+                {% endif %}
             </div>
             <h3>{{ doctor.name }}</h3>
             <div class="doctor-specialization">{{ doctor.specialization }}</div>
@@ -21,13 +25,9 @@
                 <strong>Availability:</strong> {{ doctor.availability }}
             </div>
             {% if session.user_id %}
-            <a href="{{ url_for('appointments') }}" class="btn-primary" style="display: inline-block; margin-top: 1rem;">
-                Book Appointment
-            </a>
+            <a href="{{ url_for('appointments') }}" class="btn-primary">Book Appointment</a>
             {% else %}
-            <a href="{{ url_for('login') }}" class="btn-primary" style="display: inline-block; margin-top: 1rem;">
-                Login to Book
-            </a>
+            <a href="{{ url_for('login') }}" class="btn-primary">Login to Book</a>
             {% endif %}
         </div>
         {% endfor %}
@@ -42,23 +42,17 @@
     </div>
     <div class="cards-grid">
         <div class="card">
-            <div class="card-icon">
-                <i class="fas fa-graduation-cap"></i>
-            </div>
+            <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
             <h3>Board Certified</h3>
             <p>All our veterinarians are board-certified and continuously update their knowledge</p>
         </div>
         <div class="card">
-            <div class="card-icon">
-                <i class="fas fa-hand-holding-heart"></i>
-            </div>
+            <div class="card-icon"><i class="fas fa-hand-holding-heart"></i></div>
             <h3>Compassionate Care</h3>
             <p>We treat every pet with the same love and care we'd give our own</p>
         </div>
         <div class="card">
-            <div class="card-icon">
-                <i class="fas fa-clinic-medical"></i>
-            </div>
+            <div class="card-icon"><i class="fas fa-clinic-medical"></i></div>
             <h3>Modern Equipment</h3>
             <p>State-of-the-art facilities with the latest veterinary technology</p>
         </div>
